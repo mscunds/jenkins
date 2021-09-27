@@ -9,7 +9,7 @@ pipeline {
     }
     parameters {
         choice(name: 'Version', choices: ['1.1.0', '1.2.0', '1.3.0'])
-        booleanParam(name: 'deploy', defaultValue: false)
+        booleanParam(name: 'do Deploy', defaultValue: false)
     }
     stages{
         stage("codereview") {
