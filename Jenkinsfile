@@ -16,7 +16,8 @@ pipeline {
         stage("build") {
             steps {
                 echo 'build the application'
-                sh "mnv --version"
+                sh "mvn --version"
+                sh "java -version"
             }
         }
         stage("component-test") {
