@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         NEW_VERSION = '1.3.0'
-        SERVER_CREDENTIALS = credentials('Jenkins')
+        SERVER_CREDENTIALS = credentials('SampleCredential')
     }
     stages{
         stage("codereview") {
@@ -23,7 +23,7 @@ pipeline {
         stage("integration-test") {
             steps {
                 echo 'execute integration tests'
-                withCredentials([usernamePassword(credentialsId: 'Jenkins', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
+                withCredentials([usernamePassword(credentialsId: 'SampleCredential', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
                     echo "execute some shell with ${USER} and ${PWD}"
                 }
             }
