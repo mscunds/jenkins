@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        NEW_VERSION = '1.3.0'
+    }
     stages{
         stage("codereview") {
             steps {
@@ -37,10 +40,10 @@ pipeline {
             echo 'do it always'
         }
         success {
-            echo "success"
+            echo "${NEW_VERSION} successfully processed"
         }
         failure {
-            echo 'failed'
+            echo "${NEW_VERSION} failed"
         }
     }
 }
