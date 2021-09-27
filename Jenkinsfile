@@ -7,6 +7,11 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    parameters {
+        string(name: 'Version', defaultValue: '')
+        choice(naem: 'Version', choices: ['1.1.0', '1.2.0', '1.3.0'])
+        booleanParameter(name: 'deploy', defaultValue: false)
+    }
     stages{
         stage("codereview") {
             steps {
@@ -36,12 +41,13 @@ pipeline {
         stage("deploy") {
             when {
                 expression {
-                    (BRANCH_NAME == 'dev')
+                    BRANCH_NAME == 'dev' || params.deploy
                 }
             }
             steps {
                 echo 'deploy the application'
                 echo "deploying using credentials ${SERVER_CREDENTIALS}"
+                echo "deploying version ${Version}"
             }
         }
     }
