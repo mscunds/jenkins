@@ -4,6 +4,9 @@ pipeline {
         NEW_VERSION = '1.3.0'
         SERVER_CREDENTIALS = credentials('SampleCredential')
     }
+    tools {
+        maven 'Maven'
+    }
     stages{
         stage("codereview") {
             steps {
@@ -13,6 +16,8 @@ pipeline {
         stage("build") {
             steps {
                 echo 'build the application'
+                sh "mvn --version"
+                sh "java -version"
             }
         }
         stage("component-test") {
